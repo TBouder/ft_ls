@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/13 19:22:32 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 09:55:12 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/21 17:22:04 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static void	ft_btreecmp_revtime(t_btree **tree, void const *content,
 		lstat((char *)(*tree)->content, &(stats));
 		if (timestamp < stats.st_mtime)
 			ft_btreecmp_revtime(&(*tree)->left, content, c_size, timestamp);
-		else if (timestamp >= stats.st_mtime)
+		else if (timestamp > stats.st_mtime)
 			ft_btreecmp_revtime(&(*tree)->right, content, c_size, timestamp);
+		else
+			ft_btreecmp_rev(tree, content, c_size);
 	}
 }
 
@@ -41,8 +43,10 @@ static void	ft_btreecmp_time(t_btree **tree, void const *content,
 		lstat((char *)(*tree)->content, &(stats));
 		if (timestamp > stats.st_mtime)
 			ft_btreecmp_time(&(*tree)->left, content, c_size, timestamp);
-		else if (timestamp <= stats.st_mtime)
+		else if (timestamp < stats.st_mtime)
 			ft_btreecmp_time(&(*tree)->right, content, c_size, timestamp);
+		else
+			ft_btreecmp_rev(tree, content, c_size);
 	}
 }
 
