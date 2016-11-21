@@ -6,13 +6,13 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:35:33 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 11:42:35 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/21 17:19:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_file_data	**ft_short_helper(t_list *lst, size_t size, int is_a)
+static t_file_data	**ft_short_helper(t_list *lst, size_t size, t_env env)
 {
 	t_file_data		**buffer;
 	size_t			i;
@@ -23,7 +23,7 @@ static t_file_data	**ft_short_helper(t_list *lst, size_t size, int is_a)
 	i = 0;
 	while (i < size && lst)
 	{
-		if (is_a == FALSE && EQU(((t_file_data *)lst->content)->filename, "."))
+		if (ft_check_access(env, ((t_file_data *)lst->content)->filename))
 		{
 			lst = lst->next;
 			continue;
@@ -63,7 +63,7 @@ static void			ft_print_short(t_env e, t_data_max max, t_list *lst, int l)
 	int				i;
 	int				x;
 
-	all_data = ft_short_helper(lst, max.nb_file, e.FLAGS['a']);
+	all_data = ft_short_helper(lst, max.nb_file, e);
 	i = 0;
 	x = 0;
 	while (i < l)
