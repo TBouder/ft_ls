@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 13:36:39 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 13:48:48 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/21 14:47:12 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_select_time_sort(t_env *env)
 		date = ft_strinit(ctime(&env->stats.st_birthtime));
 		env->data->timestamp = env->stats.st_birthtime;
 	}
-	if (env->FLAGS['u'])
+	else if (env->FLAGS['u'])
 	{
 		date = ft_strinit(ctime(&env->stats.st_atime));
 		env->data->timestamp = env->stats.st_atime;

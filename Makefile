@@ -6,7 +6,7 @@
 #    By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/22 12:12:36 by tbouder           #+#    #+#              #
-#    Updated: 2016/11/21 13:39:49 by tbouder          ###   ########.fr        #
+#    Updated: 2016/11/21 14:47:46 by tbouder          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 		= 	ft_ls
 
 CC			= 	gcc
 CFLAGS		= 	-Wall -Werror -Wextra
-OPTI		=	-g -O3
+OPTI		=	-g -03
 
 SRC			=	main.c \
 				ft_free.c ft_init.c \
@@ -28,29 +28,30 @@ HEAD		=	libft/libft.h
 
 LIB			=	libft/libft.a
 
-OBJ			=	$(patsubst %.c,%.o, $(SRC))
-
-JUNCK		=	$(wildcard *.gch */*.gch .DS_Store */.DS_Store)
-DIRJUNCK	=	ft_ls.dSYM
+OBJ			=	main.o \
+				ft_free.o ft_init.o \
+				ft_extract_part_one.o ft_extract_part_two.o ft_tools.o \
+				ft_ls_short.o ft_ls_one.o ft_ls_long.o \
+				ft_print.o ft_args.o ft_recur.o ft_lstinsert.o \
+				ft_btree_sort.o ft_bonus.o
 
 
 all: $(NAME)
 
 .SILENT : $(NAME) $(OBJ)
 $(NAME): $(OBJ) $(HEAD)
-	# $(MAKE) re -C libft
+	$(MAKE) re -C libft
 	$(CC) $(CFLAGS) $(OPTI) -c $(SRC)
 	$(CC) -o $@ $(OBJ) $(LIB)
 
 .SILENT : clean
 clean:
-	# $(MAKE) clean -C libft
-	rm -f $(notdir $(OBJ)) $(OBJ) $(JUNCK)
-	rm -rf $(DIRJUNCK)
+	$(MAKE) clean -C libft
+	rm -f $(OBJ)
 
 .SILENT : fclean
 fclean: clean
-	# $(MAKE) fclean -C libft
+	$(MAKE) fclean -C libft
 	rm -f $(NAME)
 
 re: fclean all
