@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 12:15:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 13:46:22 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/11/22 11:52:30 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ static void		ft_process_dir(t_env *env)
 		directory = ft_strinit(list->content);
 		env->basedir = ft_strinit(list->content);
 		(env->args >= 2) ? ft_printf("%s:\n", directory) : 0;
-		if ((to_explore = opendir(directory)) && errno != 0)
+		if ((to_explore = opendir(directory)) || errno != 0)
 			ft_print_errno(directory);
 		else
 		{
 			ft_manage_dir(env, directory, opendir(directory), 0);
 			ft_recur_launcher(opendir(directory), env, directory);
+			closedir(to_explore);
 		}
-		closedir(to_explore);
 		ft_strdel(&directory);
 		ft_strdel(&env->basedir);
 		env->blocks = 0;
