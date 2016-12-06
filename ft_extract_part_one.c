@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:01:18 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 17:15:45 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 15:35:00 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ static void		ft_extract_filename(t_env *env, char *dirname)
 		filename = ft_strinit(env->dir_content->d_name);
 	else
 		filename = ft_strinit(dirname);
-
 	if (ft_check_access(*env, filename))
 		env->data->filename = ft_strinit(filename);
 	else if (S_ISDIR(env->stats.st_mode) && env->options->flags['p'])
 		env->data->filename = ft_strjoin(filename, "/");
 	else
 		env->data->filename = ft_strinit(filename);
-
 	ft_strdel(&filename);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:18:21 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/21 13:32:32 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 16:04:58 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ static void		ft_lstinsert_args(t_list **list, void *content, size_t c_size)
 static void		ft_sort_args_helper(t_env *env, char **av, int i)
 {
 	char	*str;
+	char	*tmp;
 
-	str = ft_strnew(PATH_MAX);
+	str = ft_strnew(PATH_MAX + 1);
 	readlink(av[i], str, PATH_MAX);
-	lstat(str, &(env->stats));
+	tmp = ft_strjoin("/", str);
+	lstat(tmp, &(env->stats));
 	if (S_ISDIR(env->stats.st_mode))
 		ft_lstinsert_args(&env->lst_dir, av[i], ft_strlen(av[i]));
 	else
 		ft_lstinsert_args(&env->lst_file, av[i], ft_strlen(av[i]));
+	ft_strdel(&tmp);
 	ft_strdel(&str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 12:15:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/11/22 11:52:30 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 16:06:14 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ static void		ft_process_none(t_env *env)
 			ft_printf("ft_ls: %s: No such file or directory\n",
 			env->lst_none->content);
 		env->lst_none = env->lst_none->next;
-		if (!env->lst_none)
-		{
-			if (env->lst_file || env->lst_dir)
-				ft_putchar('\n');
-		}
 	}
 }
 
@@ -84,7 +79,7 @@ static void		ft_process_dir(t_env *env)
 		directory = ft_strinit(list->content);
 		env->basedir = ft_strinit(list->content);
 		(env->args >= 2) ? ft_printf("%s:\n", directory) : 0;
-		if ((to_explore = opendir(directory)) || errno != 0)
+		if (!(to_explore = opendir(directory)) || errno != 0)
 			ft_print_errno(directory);
 		else
 		{
