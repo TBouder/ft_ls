@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 12:15:26 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 16:06:14 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 23:09:01 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 /*
 ** Bonus :
-** -G
-** -1
-** -d
-** -U
 ** ACL
-** -c
-** -p
-** -n
+** -G -> Colors
+** -1 -> Without column
+** -d -> Directories from args as file
+** -U -> From birthtime
+** -u -> By last access
+** -c -> Sort when file status was last changed
+** -p -> / after dir
+** -n -> Display user and groups pid
 */
 
 char			*ft_join(char *s1, char *s2, char *divider)

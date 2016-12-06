@@ -6,7 +6,7 @@
 /*   By: tbouder <tbouder@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:18:21 by tbouder           #+#    #+#             */
-/*   Updated: 2016/12/06 16:04:58 by tbouder          ###   ########.fr       */
+/*   Updated: 2016/12/06 23:09:05 by tbouder          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,22 +89,13 @@ static int		ft_handle_errors(t_env *env, int value)
 {
 	int		ret;
 
-	ret = 0;
+	ret = 1;
 	if (value <= 32)
 		ret = 0;
-	else if (value <= 47)
-		ret = -1;
-	else if (value <= 57)
-		ret = 1;
-	else if (value <= 64)
-		ret = -1;
-	else if (value <= 90)
-		ret = 1;
-	else if (value <= 96)
-		ret = -1;
-	else if (value <= 122)
-		ret = 1;
-	if (ret == -1)
+	if (value != 'G' && value != '1' && value != 'd' && value != 'U' &&
+		value != 'c' && value != 'p' && value != 'l' && value != 't' &&
+		value != 'r' && value != 'R' && value != 'a' && value != 'n' &&
+		value != 'u')
 	{
 		ft_printf("./ft_ls: illegal option -- %c\n", value);
 		ft_free_env(env);
